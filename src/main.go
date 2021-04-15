@@ -29,10 +29,16 @@ func main() {
 	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/",
 		http.FileServer(http.Dir("./static/"))))
 
+	router.PathPrefix("/forms/").Handler(http.StripPrefix("/forms/",
+		http.FileServer(http.Dir("./forms/"))))
+
 	router.HandleFunc("/", HandlerBase)
 	router.HandleFunc("/base", HandlerBase)
 
-	router.HandleFunc("/add_client", HandlerAddClient)
+	router.HandleFunc("/clients", HandlerClients)
+	router.HandleFunc("/calculate", HandlerCalculate)
+	router.HandleFunc("/compony", HandlerCompony)
+	router.HandleFunc("/calucaltions", HandlerCalculation)
 
 	logger.Info(webAddress)
 
