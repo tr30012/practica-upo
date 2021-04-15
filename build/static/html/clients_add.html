@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/base.css">
+    <title></title>
+</head>
+<body>
+    <form class="decor" action="/add_client" method="post" enctype="application/x-www-form-urlencoded">
+        <div class="form-left-decoration"></div>
+        <div class="form-right-decoration"></div>
+        <div class="circle"></div>
+        <div class="form-inner">
+        <h3>Работа с клиентами</h3>
+        <input type="date" value="Дата рождения" name="data">
+        <input type="tel" value="Телефон" name="tel">
+        <input type="text" value="ФИО" name="fio">
+        
+        <h3>Серия и номер пасспорта <input type="number" value="Серия и номер пасспорта" name="pass"></h3> 
+
+        <h3>Выберите пол (М/Ж): 
+            <input type="text" name="sex">
+        </h3> 
+
+        <a><input type="submit" value="Добавить"></a>
+        <a href="/"><input type="button" value="В главное меню"></a>
+        
+        </div>
+    </form>
+</body>
+</html>

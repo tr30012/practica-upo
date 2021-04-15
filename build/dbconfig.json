@@ -1,0 +1,4 @@
+{
+    "connection": "./storage/practica-upo.db3",
+    "driver": "sqlite3"
+}
