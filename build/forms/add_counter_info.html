@@ -8,7 +8,7 @@
     <title></title>
 </head>
 <body>
-    <form class="decor" action="/add_client" method="post" enctype="application/x-www-form-urlencoded">
+    <form class="decor" action="/add_counter_info" method="post" enctype="application/x-www-form-urlencoded">
         <div class="form-left-decoration"></div>
         <div class="form-right-decoration"></div>
         <div class="circle"></div>
@@ -16,9 +16,9 @@
 
         <h3>Добавление показания счетчика</h3>
         
-        <input type="number" placeholder="Серия и номер пасспорта">
-        <input type="number" placeholder="Показания счетчика">
-        <input type="month" placeholder="Месяц">
+        <input type="number" placeholder="Серия и номер пасспорта" name="number">
+        <input type="number" placeholder="Показания счетчика" name="count">
+        <input type="month" placeholder="Месяц" name="month">
 
         <a><input type="submit" value="Добавить"></a>
         <a href="/"><input type="button" value="В главное меню"></a>

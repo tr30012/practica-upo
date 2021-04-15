@@ -8,21 +8,21 @@
     <title></title>
 </head>
 <body>
-    <form class="decor" action="/add_client" method="post" enctype="application/x-www-form-urlencoded">
+    <form class="decor" action="/add_flat" method="post" enctype="application/x-www-form-urlencoded">
         <div class="form-left-decoration"></div>
         <div class="form-right-decoration"></div>
         <div class="circle"></div>
         <div class="form-inner">
         <h3>Работа с клиентами</h3>
         
-        <input type="text" placeholder="Город">
-        <input type="text" placeholder="Улица">
-        <input type="number" placeholder="Номер дома">
-        <input type="number" placeholder="Номер квартиры">
-        <input type="number" placeholder="Площадь квартиры (кв. м)">
-        <input type="number" placeholder="Средняя температура в квартире">
-        <input type="text" placeholder="Обслуживающая компания">
-        <input type="text" placeholder="Есть счетчик? (Да/Нет)">
+        <input type="text" placeholder="Город" name="city">
+        <input type="text" placeholder="Улица" name="street">
+        <input type="number" placeholder="Номер дома" name="house">
+        <input type="number" placeholder="Номер квартиры" name="flat">
+        <input type="number" placeholder="Площадь квартиры (кв. м)" name="sq">
+        <input type="number" placeholder="Средняя температура в квартире" name="t">
+        <input type="text" placeholder="Обслуживающая компания" name="compony">
+        <input type="text" placeholder="Есть счетчик? (Да/Нет)" name>
 
         <a><input type="submit" value="Добавить"></a>
         <a href="/"><input type="button" value="В главное меню"></a>

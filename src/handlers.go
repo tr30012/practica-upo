@@ -16,17 +16,6 @@ func HandlerBase(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, nil)
 }
 
-func HandlerAddClient(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("./forms/add_client.html")
-
-	if err != nil {
-		http.Error(w, err.Error(), 1)
-		logger.Error(err.Error())
-	}
-
-	t.Execute(w, nil)
-}
-
 func HandlerClients(w http.ResponseWriter, r *http.Request) {
 	t, err := template.ParseFiles("./templates/clients.html")
 
@@ -62,6 +51,53 @@ func HandlerCompony(w http.ResponseWriter, r *http.Request) {
 
 func HandlerCalculation(w http.ResponseWriter, r *http.Request) {
 	t, err := template.ParseFiles("./templates/calculations.html")
+
+	if err != nil {
+		http.Error(w, err.Error(), 1)
+		logger.Error(err.Error())
+	}
+
+	t.Execute(w, nil)
+}
+
+func HandlerAddClient(w http.ResponseWriter, r *http.Request) {
+	t, err := template.ParseFiles("./forms/add_flat.html")
+
+	r.ParseForm()
+	logger.Info(r.Form)
+
+	if err != nil {
+		http.Error(w, err.Error(), 1)
+		logger.Error(err.Error())
+	}
+
+	t.Execute(w, nil)
+}
+
+func HandlerAddCounterInfo(w http.ResponseWriter, r *http.Request) {
+	t, err := template.ParseFiles("./templates/clients.html")
+
+	if err != nil {
+		http.Error(w, err.Error(), 1)
+		logger.Error(err.Error())
+	}
+
+	t.Execute(w, nil)
+}
+
+func HandlerAddCounter(w http.ResponseWriter, r *http.Request) {
+	t, err := template.ParseFiles("./forms/add_counter_info.html")
+
+	if err != nil {
+		http.Error(w, err.Error(), 1)
+		logger.Error(err.Error())
+	}
+
+	t.Execute(w, nil)
+}
+
+func HandlerAddFlat(w http.ResponseWriter, r *http.Request) {
+	t, err := template.ParseFiles("./forms/add_counter.html")
 
 	if err != nil {
 		http.Error(w, err.Error(), 1)

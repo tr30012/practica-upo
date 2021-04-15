@@ -40,6 +40,11 @@ func main() {
 	router.HandleFunc("/compony", HandlerCompony)
 	router.HandleFunc("/calucaltions", HandlerCalculation)
 
+	router.HandleFunc("/add_client", HandlerAddClient)
+	router.HandleFunc("/add_counter_info", HandlerAddCounterInfo)
+	router.HandleFunc("/add_counter", HandlerAddCounter)
+	router.HandleFunc("/add_flat", HandlerAddFlat)
+
 	logger.Info(webAddress)
 
 	if err := http.ListenAndServe(webAddress, router); err != nil {
