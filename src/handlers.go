@@ -138,11 +138,12 @@ func HandlerAddCompony(w http.ResponseWriter, r *http.Request) {
 func HandlerShowComponies(w http.ResponseWriter, r *http.Request) {
 	rows := storage.QueryString(SQLSelectAllCompanies)
 
-	var comopy Company
+	companies := make([]Company, 0)
 
 	for rows.Next() {
-		rows.Scan(&comopy.Id, &comopy.Name, &comopy.Cost, &comopy.Recs, &comopy.FIO)
-		logger.Info(comopy)
+		var compony Company
+		rows.Scan(&compony.Id, &compony.Name, &compony.Cost, &compony.Recs, &compony.FIO)
+		companies = append(companies, compony)
 	}
 
 	if err := rows.Close(); err != nil {
@@ -157,5 +158,5 @@ func HandlerShowComponies(w http.ResponseWriter, r *http.Request) {
 		logger.Error(err.Error())
 	}
 
-	t.Execute(w, nil)
+	t.Execute(w, companies)
 }

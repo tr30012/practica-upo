@@ -14,6 +14,15 @@
         <div class="circle"></div>
         <div class="form-inner">
         <h3>Работа с компаниями</h3>
+        {{ range . }}
+        <textarea rows="6" readonly style="line-height: normal;">
+
+Название: {{ .Name }}
+Тариф: {{ .Cost }} р.
+Реквизиты: {{ .Recs }} 
+ФИО руководителя: {{ .FIO }} 
+        </textarea>
+        {{ end }}
         <a href="/"><input type="button" value="В главное меню"></a>
         </div>
     </form>
