@@ -104,16 +104,16 @@ func HandlerAddCounter(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandlerAddFlat(w http.ResponseWriter, r *http.Request) {
-	/*
-		companyName := r.FormValue("compony")
-		company, err := storage.GetComponyByName(companyName)
 
-		if err != nil {
-			logger.Warning("Нет такой компании")
-			http.Redirect(w, r, "/", http.StatusSeeOther)
-			return
-		}
-	*/
+	companyName := r.FormValue("compony")
+	company, err := storage.GetComponyByName(companyName)
+
+	if err != nil {
+		logger.Warning("Нет такой компании")
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+		return
+	}
+
 	rows := storage.QueryString(`SELECT ID_Sobstv FROM Sobstv ORDER BY ID_Sobstv DESC`)
 
 	var sobstvId int = 0
@@ -123,16 +123,18 @@ func HandlerAddFlat(w http.ResponseWriter, r *http.Request) {
 		logger.Info("ОШИБКА")
 	}
 
-	//city := r.FormValue("city")
-	//flat := r.FormValue("flat")
-	//house := r.FormValue("hause")
-	//sq := string(r.FormValue("sq"))
-	//street := r.FormValue("street")
-	//temp := string(r.FormValue("t"))
+	rows.Close()
 
-	//address := "г. " + city + " ул. " + street + " " + house + " кв. " + flat
+	city := r.FormValue("city")
+	flat := r.FormValue("flat")
+	house := r.FormValue("hause")
+	sq := string(r.FormValue("sq"))
+	street := r.FormValue("street")
+	temp := string(r.FormValue("t"))
 
-	storage.ExecuteString(SQLInsertFlat, "", "", "", 4, 1)
+	address := "г. " + city + " ул. " + street + " " + house + " кв. " + flat
+
+	storage.ExecuteString(SQLInsertFlat, address, sq, temp, sobstvId, company.Id)
 
 	t, err := template.ParseFiles("./forms/add_counter.html")
 

@@ -96,6 +96,8 @@ func (s *Storage) ExecuteString(cmd string, a ...interface{}) {
 	q, err := s.db.Prepare(cmd)
 	logger.Info("Подготовка строки: ", cmd)
 
+	defer q.Close()
+
 	if err != nil {
 		logger.Error(err.Error())
 		panic(err)
@@ -124,6 +126,8 @@ func (s *Storage) QueryString(cmd string, a ...interface{}) *sql.Rows {
 func (s *Storage) GetComponyByName(name string) (Company, error) {
 	rows := storage.QueryString(SQLSelectAllCompanies)
 
+	defer rows.Close()
+
 	var compony Company
 
 	for rows.Next() {
@@ -132,18 +136,8 @@ func (s *Storage) GetComponyByName(name string) (Company, error) {
 
 		if name == compony.Name {
 
-			if err := rows.Close(); err != nil {
-				logger.Error(err.Error())
-				panic(err)
-			}
-
 			return compony, nil
 		}
-	}
-
-	if err := rows.Close(); err != nil {
-		logger.Error(err.Error())
-		panic(err)
 	}
 
 	return compony, errors.New("nil")
