@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"encoding/json"
+	"errors"
 	"io/ioutil"
 	"os"
 
@@ -118,4 +119,32 @@ func (s *Storage) QueryString(cmd string, a ...interface{}) *sql.Rows {
 
 	logger.Info("Успешно")
 	return rows
+}
+
+func (s *Storage) GetComponyByName(name string) (Company, error) {
+	rows := storage.QueryString(SQLSelectAllCompanies)
+
+	var compony Company
+
+	for rows.Next() {
+
+		rows.Scan(&compony.Id, &compony.Name, &compony.Cost, &compony.Recs, &compony.FIO)
+
+		if name == compony.Name {
+
+			if err := rows.Close(); err != nil {
+				logger.Error(err.Error())
+				panic(err)
+			}
+
+			return compony, nil
+		}
+	}
+
+	if err := rows.Close(); err != nil {
+		logger.Error(err.Error())
+		panic(err)
+	}
+
+	return compony, errors.New("nil")
 }
