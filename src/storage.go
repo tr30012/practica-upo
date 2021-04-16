@@ -106,3 +106,16 @@ func (s *Storage) ExecuteString(cmd string, a ...interface{}) {
 	}
 	logger.Info("Успешно")
 }
+
+func (s *Storage) QueryString(cmd string, a ...interface{}) *sql.Rows {
+	logger.Info("Подготовка строки: ", cmd)
+	rows, err := s.db.Query(cmd, a...)
+
+	if err != nil {
+		logger.Error(err.Error())
+		panic(err)
+	}
+
+	logger.Info("Успешно")
+	return rows
+}

@@ -8,15 +8,21 @@
     <title></title>
 </head>
 <body>
-    <form class="decor">
+    <form class="decor" action="/add_compony" method="post" enctype="application/x-www-form-urlencoded">
         <div class="form-left-decoration"></div>
         <div class="form-right-decoration"></div>
         <div class="circle"></div>
         <div class="form-inner">
-        <h3>Работа с компаниями</h3>
-        <a href="/"><input type="button" value="Просмотр данных"></a>
-        <a href="/forms/add_compony.html"><input type="button" value="Изминение данных"></a>
+        <h3>Изминение данных компании</h3>
+        
+        <input type="text" placeholder="Название" name="name">
+        <input type="text" placeholder="Тариф (1 кв\м)" name="cost">
+        <input type="text" placeholder="Реквизиты" name="recs">
+        <input type="text" placeholder="ФИО руководителя" name="fio">
+
+        <a><input type="submit" value="Добавить"></a>
         <a href="/"><input type="button" value="В главное меню"></a>
+        
         </div>
     </form>
 </body>

@@ -41,6 +41,9 @@ func HandlerCalculate(w http.ResponseWriter, r *http.Request) {
 func HandlerCompony(w http.ResponseWriter, r *http.Request) {
 	t, err := template.ParseFiles("./templates/compony.html")
 
+	r.ParseForm()
+	logger.Info(r.Form)
+
 	if err != nil {
 		http.Error(w, err.Error(), 1)
 		logger.Error(err.Error())
@@ -66,6 +69,14 @@ func HandlerAddClient(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	logger.Info(r.Form)
 
+	date := r.FormValue("date")
+	fio := r.FormValue("fio")
+	pass := r.FormValue("pass")
+	sex := r.FormValue("sex")
+	tel := r.FormValue("sex")
+
+	storage.ExecuteString(SQLInsertClient, date, tel, fio, pass, sex)
+
 	if err != nil {
 		http.Error(w, err.Error(), 1)
 		logger.Error(err.Error())
@@ -75,18 +86,14 @@ func HandlerAddClient(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandlerAddCounterInfo(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("./templates/clients.html")
-
-	if err != nil {
-		http.Error(w, err.Error(), 1)
-		logger.Error(err.Error())
-	}
-
-	t.Execute(w, nil)
+	http.Redirect(w, r, "/clients", http.StatusSeeOther)
 }
 
 func HandlerAddCounter(w http.ResponseWriter, r *http.Request) {
 	t, err := template.ParseFiles("./forms/add_counter_info.html")
+
+	r.ParseForm()
+	logger.Info(r.Form)
 
 	if err != nil {
 		http.Error(w, err.Error(), 1)
@@ -98,6 +105,52 @@ func HandlerAddCounter(w http.ResponseWriter, r *http.Request) {
 
 func HandlerAddFlat(w http.ResponseWriter, r *http.Request) {
 	t, err := template.ParseFiles("./forms/add_counter.html")
+
+	/*
+		city := r.FormValue("city")
+		compony := r.FormValue("compony")
+		flat := r.FormValue("flat")
+		house := r.FormValue("hause")
+		sq := r.FormValue("sq")
+		street := r.FormValue("street")
+		t := r.FormValue("t")
+	*/
+
+	if err != nil {
+		http.Error(w, err.Error(), 1)
+		logger.Error(err.Error())
+	}
+
+	t.Execute(w, nil)
+}
+
+func HandlerAddCompony(w http.ResponseWriter, r *http.Request) {
+	cost := r.FormValue("cost")
+	fio := r.FormValue("fio")
+	name := r.FormValue("name")
+	recs := r.FormValue("recs")
+
+	storage.ExecuteString(SQLInsertCompony, name, cost, recs, fio)
+
+	http.Redirect(w, r, "/compony", http.StatusSeeOther)
+}
+
+func HandlerShowComponies(w http.ResponseWriter, r *http.Request) {
+	rows := storage.QueryString(SQLSelectAllCompanies)
+
+	var comopy Company
+
+	for rows.Next() {
+		rows.Scan(&comopy.Id, &comopy.Name, &comopy.Cost, &comopy.Recs, &comopy.FIO)
+		logger.Info(comopy)
+	}
+
+	if err := rows.Close(); err != nil {
+		logger.Error(err)
+		panic(err)
+	}
+
+	t, err := template.ParseFiles("./templates/show_componies.html")
 
 	if err != nil {
 		http.Error(w, err.Error(), 1)

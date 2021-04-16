@@ -44,6 +44,9 @@ func main() {
 	router.HandleFunc("/add_counter_info", HandlerAddCounterInfo)
 	router.HandleFunc("/add_counter", HandlerAddCounter)
 	router.HandleFunc("/add_flat", HandlerAddFlat)
+	router.HandleFunc("/add_compony", HandlerAddCompony)
+
+	router.HandleFunc("/show_componies", HandlerShowComponies)
 
 	logger.Info(webAddress)
 
